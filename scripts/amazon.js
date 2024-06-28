@@ -1,6 +1,7 @@
 import * as CartModule from "../data/cart.js";
 import { products } from "../data/products.js";
 import * as utils from "./utils/money.js";
+import { cartQuantity } from "./utils/cartUtils.js";
 let productsHTML = ``;
 products.forEach((product) => {
   productsHTML += `
@@ -60,14 +61,7 @@ products.forEach((product) => {
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
-function cartQuantity() {
-  let cartQuantity = 0;
-
-  CartModule.cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
-  });
-  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-}
+cartQuantity();
 
 function addedCartMessage(addMessage, productContainer) {
   addMessage.style.opacity = 1;
