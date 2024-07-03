@@ -1,7 +1,7 @@
 import * as CartModule from "../data/cart.js";
 import { products } from "../data/products.js";
 import * as utils from "./utils/money.js";
-import { cartQuantity } from "./utils/cartUtils.js";
+import { cartQuantity, removeFromCart } from "./utils/cartUtils.js";
 let productsHTML = ``;
 products.forEach((product) => {
   productsHTML += `
@@ -61,8 +61,6 @@ products.forEach((product) => {
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
-cartQuantity();
-
 function addedCartMessage(addMessage, productContainer) {
   addMessage.style.opacity = 1;
   setTimeout(() => {
@@ -82,3 +80,11 @@ document.querySelectorAll(".add-to-cart-button").forEach((button) => {
     addedCartMessage(addMessage, productContainer);
   });
 });
+document.querySelectorAll(".remove-from-cart-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    const productId = button.dataset.productId;
+    removeFromCart(productId);
+  });
+});
+
+cartQuantity();
